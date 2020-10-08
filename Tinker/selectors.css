@@ -1,29 +1,17 @@
-table {
-    margin: 0 auto;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap');
+
+img {
+    width: 30%;
+    float: left;
+    margin: 1.66%;
 }
 
+h1 {
 
-td {
-    width: 100px;
-    height: 100px;
-    /* background: pink; */
-    padding: 0;
-}
-
-table {
-    /* border: 1px solid  black; */
-}
-
-td:nth-of-type(2) {
-    border-left: 2px solid black;
-    border-right: 2px solid black;
-    margin: 0;
-
-}
-
-.vertical {
-    border-top: 2px solid black;
-    border-bottom: 2px solid black;
-    margin: 0;
-
+    width: 30%;
+    font-family: 'Raleway', sans-serif;
+    margin: 1.66%;
+    font-weight: 900;
+    border-bottom: 1px solid black;
+    padding-bottom: 40px;
 }
