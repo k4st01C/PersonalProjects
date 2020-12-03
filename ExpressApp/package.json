@@ -1,0 +1,14 @@
+{
+  "name": "demo",
+  "version": "1.0.0",
+  "description": "demo işte aq",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kemal aydık",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
