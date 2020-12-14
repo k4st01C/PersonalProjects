@@ -12,13 +12,12 @@ app.get('/speak/:animal', (req, res) =>
     `the ${req.params.animal} says ${sounds[req.params.animal] || 'ahaha'}`,
   ),
 );
-app.get('/repeat/:word/:number', function (req, res) {
-  let wording = '';
-  for (let i = 0; i < parseInt(req.params.number); i++) {
-    wording += req.params.word+' ';
-  }
-  res.send(wording);
-});
+
+
+
+app.post('/createAnimal')
+
+
 
 app.get('*', (req, res) => res.send('page not found'));
 
