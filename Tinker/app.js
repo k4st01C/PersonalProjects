@@ -13,9 +13,14 @@ app.get('/speak/:animal', (req, res) =>
   ),
 );
 
+app.get('/test/:thing',(req,res)=>{
+  const thing=req.params.thing;
+  res.render('home.ejs',{thing})
+})
 
 
-app.post('/createAnimal')
+
+
 
 
 
