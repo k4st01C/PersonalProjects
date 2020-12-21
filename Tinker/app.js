@@ -1,35 +1,31 @@
-const app = require('express')();
-const bodyParser = require('body-parser');
+const axios = require('axios');
+const express = require('express');
+const app = express();
 
-const sounds = {
-  pig: '"oink"',
-  cat: '"meow"',
-  dog: '"bark"',
-};
+const movies
 
-app.set('view engine', 'ejs');
-app.use(bodyParser.urlencoded({ extended: false }));
+axios
+  .get('http://www.omdbapi.com/', {
+    params: {
+      apikey: '8e9a10f',
+      s: 'tes',
+      plot: 'full',
+    },
+  })
+  .then(function (response) {
+    console.log(response.data);
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  .then(function () {
+    // always executed
+  });
 
-app.get('/', (req, res) => res.send('Hi There!'));
-
-app.get('/speak/:animal', (req, res) =>
-  res.send(
-    `the ${req.params.animal} says ${sounds[req.params.animal] || 'ahaha'}`,
-  ),
-);
-
-let name;
-
-app.get('/test/:thing', (req, res) => {
-  const thing = req.params.thing;
-  res.render('home', { thing, name });
+app.get('/', (req, res) => {
+  res.send;
 });
 
-app.post('/create', (req, res) => {
-  name = req.body.name;
-  res.redirect('test/:thing');
+app.listen('3000', () => {
+  console.log('server starting');
 });
-
-app.get('*', (req, res) => res.send('page not found'));
-
-app.listen(3000, () => console.log('starting..'));
