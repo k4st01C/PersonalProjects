@@ -2,7 +2,6 @@ const axios = require('axios');
 const express = require('express');
 const app = express();
 
-const movies
 
 axios
   .get('http://www.omdbapi.com/', {
