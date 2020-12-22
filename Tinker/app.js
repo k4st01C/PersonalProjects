@@ -3,17 +3,19 @@ const express = require('express');
 const app = express();
 app.set('view engine', 'ejs');
 
+
 app.get('/', (req, res) => {
+  const search=req.query.search
+  console.log(req.query);
   axios
     .get('http://www.omdbapi.com/', {
       params: {
         apikey: '8e9a10f',
-        s: 'tes',
+        s: search,
       },
     })
     .then(function (response) {
       res.render('results',{results:response.data.Search});
-      console.log(response.data.Search);
     })
     .catch(function (error) {
       console.log(error);
@@ -22,6 +24,10 @@ app.get('/', (req, res) => {
       // always executed
     });
 });
+
+app.get('/search',(req,res)=>{
+  res.render('search')
+})
 
 app.listen('3000', () => {
   console.log('server starting');

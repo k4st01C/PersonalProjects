@@ -1,6 +1,9 @@
-<% results.forEach(e=>{ %>
-    <li>
-        <%= e.Title %>
-    </li>
+<ul>
+    <% results.forEach(e=>{ %>
 
-    <% }) %>
+        <li>
+            <%= `${e.Title} - ${e.Year}` %>
+        </li>
+
+        <% }) %>
+</ul>
