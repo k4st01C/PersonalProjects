@@ -1,16 +1,18 @@
-<h1>welcometo camping grounds</h1>
+<%- include('partials/header.ejs') %> 
 
 
-
-
-
+<h1>welcome to camping grounds</h1>
+<a href="/campgrounds/new">New Camping Ground</a>
 <% campAreas.forEach(element=> { %>
-    <div>
-        <h4>
-            <%= element.name %> 
-        </h4>
-        <img src="<%= element.img %>" alt="">
-    </div>
+
+    <div class="card" style="width: 18rem;">
+        <img src="<%= element.img %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= element.name %></h5>
+        </div>
+      </div>
 
 
     <% }) %>
+
+    <%- include('partials/footer.ejs') %> 
