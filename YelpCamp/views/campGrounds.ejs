@@ -1,18 +1,23 @@
-<%- include('partials/header.ejs') %> 
+<%- include('partials/header.ejs') %>
 
-
-<h1>welcome to camping grounds</h1>
-<a href="/campgrounds/new">New Camping Ground</a>
-<% campAreas.forEach(element=> { %>
-
-    <div class="card" style="width: 18rem;">
-        <img src="<%= element.img %>" class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title"><%= element.name %></h5>
+    <header class="bg-light p-5">
+        <h1>Kamp Alanlarına hoşgeldiniz!</h1>
+        <p>Türkiye'nin doğa harikası yerlerinde kamp yapmak için tavsiyeler</p>
+        <a class="btn btn-primary btn-lg" href="/campgrounds/new">New Camping Ground</a>
+    </header>
+    
+    <div class="row row-cols-md-3 g-4 mt-2">
+        <% campAreas.forEach(element=> { %>
+            <div class="col">
+                <div class="card">
+                    <img src="<%= element.img %>" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= element.name %></h5>
+                    </div>
+                </div>
+            </div>
+            
+            <% }) %>
         </div>
-      </div>
 
-
-    <% }) %>
-
-    <%- include('partials/footer.ejs') %> 
+        <%- include('partials/footer.ejs') %>
