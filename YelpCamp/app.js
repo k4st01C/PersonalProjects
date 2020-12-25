@@ -22,6 +22,21 @@ const campAreas = [
     img:
       'https://images.pexels.com/photos/1368382/pexels-photo-1368382.jpeg?cs=srgb&dl=pexels-vlad-bagacian-1368382.jpg&fm=jpg',
   },
+  {
+    name: 'Datça',
+    img:
+      'https://images.pexels.com/photos/1368382/pexels-photo-1368382.jpeg?cs=srgb&dl=pexels-vlad-bagacian-1368382.jpg&fm=jpg',
+  },
+  {
+    name: 'Karadeniz',
+    img:
+      'https://images.pexels.com/photos/699558/pexels-photo-699558.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
+  },
+  {
+    name: 'Ayder',
+    img:
+      'https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
+  },
 ];
 
 app.get('/', (req, res) => {
