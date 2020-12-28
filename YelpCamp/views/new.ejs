@@ -1,6 +1,6 @@
 <%- include('partials/header.ejs') %>
 
-  <form action="/campgrounds" method="POST">
+  <form action="/campgrounds" method="POST" class="w-50 mx-auto">
     <div class="form-outline mb-4">
       <input type="text" placeholder="Camp Name" name="name" class="form-control">
     </div>
@@ -8,9 +8,9 @@
       <input type="text" placeholder="Camp Image Address" name="img" class="form-control">
 
     </div>
-    <button type="submit" class="btn btn-primary btn-block mb-4">Add New Camp Ground</button>
+    <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Add New Camp Ground</button>
 
+    <a class="d-flex" href="/campgrounds">Go back</a>
   </form>
-  <a href="/campgrounds">Go back</a>
 
   <%- include('partials/footer.ejs') %>
