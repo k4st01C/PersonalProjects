@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const app = express();
 const bodyParser = require('body-parser');
 
@@ -6,52 +7,42 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const campAreas = [
-  {
-    name: 'Karadeniz',
-    img:
-      'https://images.pexels.com/photos/699558/pexels-photo-699558.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  },
-  {
-    name: 'Ayder',
-    img:
-      'https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-  },
-  {
-    name: 'Datça',
-    img:
-      'https://images.pexels.com/photos/1368382/pexels-photo-1368382.jpeg?cs=srgb&dl=pexels-vlad-bagacian-1368382.jpg&fm=jpg',
-  },
-  {
-    name: 'Datça',
-    img:
-      'https://images.pexels.com/photos/1368382/pexels-photo-1368382.jpeg?cs=srgb&dl=pexels-vlad-bagacian-1368382.jpg&fm=jpg',
-  },
-  {
-    name: 'Karadeniz',
-    img:
-      'https://images.pexels.com/photos/699558/pexels-photo-699558.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260',
-  },
-  {
-    name: 'Ayder',
-    img:
-      'https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500',
-  },
-];
+mongoose.connect('mongodb://localhost/yelpCamp', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+
+const campSiteSchema = new mongoose.Schema({
+  name: String,
+  img: String,
+});
+
+const CampSite = mongoose.model('CampSite', campSiteSchema);
 
 app.get('/', (req, res) => {
   res.render('home');
 });
 
 app.get('/campgrounds', (req, res) => {
-  res.render('campgrounds', { campAreas });
+  CampSite.find({}, (err, campAreas) => {
+    if (err) console.log(err);
+    res.render('campgrounds', { campAreas });
+  });
 });
 
 app.post('/campgrounds', (req, res) => {
   const name = req.body.name;
   const img = req.body.img;
-  campAreas.push({ name, img });
-  res.redirect('campgrounds')
+
+  const campsite = new CampSite({
+    name: name,
+    img: img,
+  });
+
+  campsite.save((err, campSite) => {
+    if (err) console.log(err);
+  });
+  res.redirect('/campgrounds')
 });
 
 app.get('/campgrounds/new', (req, res) => {
