@@ -27,15 +27,16 @@ app.get('/', (req, res) => {
 app.get('/campgrounds', (req, res) => {
   CampSite.find({}, (err, campAreas) => {
     if (err) console.log(err);
-    else res.render('campgrounds', { campAreas });
+    else res.render('index', { campAreas });
   });
 });
-
+ 
 app.post('/campgrounds', (req, res) => {
    const name = req.body.name;
   const img = req.body.img;
+  const description = req.body.description;
 
-  CampSite.create({ name, img }, (err, campsite) => {
+  CampSite.create({ name, img, description }, (err, campsite) => {
     if (err) {
 
       console.log(err);
@@ -48,9 +49,14 @@ app.get('/campgrounds/new', (req, res) => {
 });
 
 app.get('/campgrounds/:id', (req,res)=>{
-  const mid=CampSite.find({id:req.params.id})
-  res.send(mid)
+  CampSite.findById(req.params.id,(err,campArea)=>{
+    if (err) console.log(err);
+    else {
+      res.render('show',{campArea})
+
+    }
+  })
 })
 
 app.listen('3000', () => console.log('Starting'));
- 
+  
