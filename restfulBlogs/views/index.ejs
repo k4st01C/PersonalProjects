@@ -1,5 +1,33 @@
-<%- include('partials/header.ejs') %> 
+<%- include('partials/header.ejs') %>
 
 
 
-<%- include('partials/footer.ejs') %> 
+<h1>
+
+    <a href="/blogs/new">New</a>
+</h1>
+<div class="ui link cards container">
+    <% blogs.forEach(element=>{ %>
+
+            <div class="card">
+              <div class="image">
+                <img src="<%=element.img%>">
+              </div>
+              <div class="content">
+                <div class="header"><%=element.name%></div>
+
+                <div class="description">
+                    <%=element.article%>
+                </div>
+              </div>
+
+            </div>
+            
+            
+            
+            <% }) %>
+        </div>
+
+
+
+            <%- include('partials/footer.ejs') %>

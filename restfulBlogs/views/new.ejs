@@ -1,5 +1,25 @@
 <%- include('partials/header.ejs') %> 
 
+<div class="ui segment">
+ 
+    <form method="POST" action="/blogs" class="ui form">
+        <div class="field">
+            <label>Blog Name</label>
+            <input type="text" name="name" placeholder="Blog Name">
+        </div>
+        <div class="field">
+            <label>Blog Image</label>
+            <input type="text" name="img" placeholder="Image">
+        </div>
+        <div class="field">
+            <label>Blog Description</label>
+            <textarea name="article" placeholder="Article "cols="30" rows="10"></textarea>
+        </div>
+
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+    
+</div>
 
 
 <%- include('partials/footer.ejs') %> 
