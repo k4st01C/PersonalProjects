@@ -1,6 +1,6 @@
 const express = require('express'),
   mongoose = require('mongoose'),
-  methodOverride=require('method-verride')
+  methodOverride=require('method-override')
   bodyParser = require('body-parser'),
   app = express();
 
@@ -23,9 +23,11 @@ const blogSchema = new mongoose.Schema({
 
 const Blog = mongoose.model('Blog', blogSchema);
 
+
 app.get('/', (req, res) => {
   res.render('home');
 });
+
 
 app.get('/blogs', (req, res) => {
   Blog.find({}, (err, blogs) => {
