@@ -1,11 +1,13 @@
 const express = require('express'),
   mongoose = require('mongoose'),
+  methodOverride=require('method-verride')
   bodyParser = require('body-parser'),
   app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(methodOverride('_method'))
 
 mongoose.connect('mongodb://localhost:27017/restfulBlogs', {
     useNewUrlParser: true,
@@ -16,6 +18,7 @@ const blogSchema = new mongoose.Schema({
   name: String,
   img: String,
   article: String,
+  created:{type:Date,default:Date.now()},
 });
 
 const Blog = mongoose.model('Blog', blogSchema);
@@ -91,3 +94,4 @@ app.delete('/blogs/:id', (req, res) => {
 app.listen('3000', () => {
   console.log('starting');
 });
+
