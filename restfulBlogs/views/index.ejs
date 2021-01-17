@@ -13,6 +13,7 @@
                 <div class="header">
                     <%=element.name%>
                 </div>
+                    <%=element.article.substring(0,100)%>...
                     <button><a href="/blogs/<%=element._id%>/edit">edit</a> </button>
                 <form method="POST" action="/blogs/<%=element._id%>?_method=DELETE" style='display:inline-block'>
                     <button>delete</button>
