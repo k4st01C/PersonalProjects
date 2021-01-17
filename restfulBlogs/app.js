@@ -9,7 +9,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'))
 
-mongoose.connect('mongodb://localhost:27017/restfulBlogs', {
+mongoose.connect('mongodb+srv://k45t01c:a1b9c2d8e3f4@cluster0.rbzkm.mongodb.net/restfulBlogs?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
@@ -31,7 +31,7 @@ app.get('/', (req, res) => {
 
 app.get('/blogs', (req, res) => {
   Blog.find({}, (err, blogs) => {
-    if (err) console.log(err);
+    if (err) res.redirect('/')
     else {
       res.render('index', { blogs });
     }
@@ -47,9 +47,8 @@ app.post('/blogs', (req, res) => {
     img = req.body.img,
     article = req.body.article;
 
-  Blog.create({ name, img, article }, (err, blog) => {
-    if (err) console.log(err);
-    else res.redirect('/blogs');
+  Blog.create({ name, img, article }, (err) => {
+    res.redirect('/blogs');
   });
 });
 

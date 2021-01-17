@@ -1,5 +1,24 @@
 <%- include('partials/header.ejs') %> 
 
+<div class="ui segment">
+ 
+    <form method="POST" action="/blogs/<%=blog._id%>?_method=PUT" class="ui form">
+        <div class="field">
+            <label>Blog Name</label>
+            <input type="text" name="name" value=<%=blog.name%>>
+        </div>
+        <div class="field">
+            <label>Blog Image</label>
+            <input type="text" name="img" value=<%=blog.img%>>
+        </div>
+        <div class="field">
+            <label>Blog Description</label>
+            <textarea name="article" cols="30" rows="10"><%-blog.article%></textarea>
+        </div>
 
+        <button class="ui button" type="submit">Submit</button>
+    </form>
+    
+</div>
 
 <%- include('partials/footer.ejs') %> 
