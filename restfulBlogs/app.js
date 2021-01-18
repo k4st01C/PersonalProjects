@@ -1,37 +1,42 @@
 const express = require('express'),
   mongoose = require('mongoose'),
-  methodOverride=require('method-override')
+  methodOverride = require('method-override'),
   bodyParser = require('body-parser'),
+  expressSanitizer = require('express-sanitizer'),
   app = express();
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(methodOverride('_method'))
+app.use(expressSanitizer());
+app.use(methodOverride('_method'));
 
-mongoose.connect('mongodb+srv://k45t01c:a1b9c2d8e3f4@cluster0.rbzkm.mongodb.net/restfulBlogs?retryWrites=true&w=majority', {
+mongoose.connect(
+  'mongodb+srv://k45t01c:a1b9c2d8e3f4@cluster0.rbzkm.mongodb.net/restfulBlogs?retryWrites=true&w=majority',
+  {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-  });
+  },
+);
+
+mongoose.set('useFindAndModify', false);
 
 const blogSchema = new mongoose.Schema({
   name: String,
   img: String,
   article: String,
-  created:{type:Date,default:Date.now()},
+  created: { type: Date, default: Date.now() },
 });
 
 const Blog = mongoose.model('Blog', blogSchema);
-
 
 app.get('/', (req, res) => {
   res.render('home');
 });
 
-
 app.get('/blogs', (req, res) => {
   Blog.find({}, (err, blogs) => {
-    if (err) res.redirect('/')
+    if (err) res.redirect('/');
     else {
       res.render('index', { blogs });
     }
@@ -45,8 +50,7 @@ app.get('/blogs/new', (req, res) => {
 app.post('/blogs', (req, res) => {
   const name = req.body.name,
     img = req.body.img,
-    article = req.body.article;
-
+    article = req.sanitize(req.body.article);
   Blog.create({ name, img, article }, (err) => {
     res.redirect('/blogs');
   });
@@ -95,4 +99,3 @@ app.delete('/blogs/:id', (req, res) => {
 app.listen('3000', () => {
   console.log('starting');
 });
-

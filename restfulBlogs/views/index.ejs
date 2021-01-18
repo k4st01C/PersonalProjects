@@ -1,28 +1,30 @@
 <%- include('partials/header.ejs') %>
 
 
-<div class="ui link cards container">
-    <% blogs.forEach(element=>{ %>
-        <div class="card">
-            <div class="image">
-                <img src="<%=element.img%>">
-                <a href="blogs/<%=element._id%>">More..
-                </a>
-            </div>
-            <div class="content">
-                <div class="header">
-                    <%=element.name%>
+    <div class="ui link cards container">
+        <% blogs.forEach(element=>{ %>
+            <div class="card">
+                <div class="image">
+                    <img src="<%=element.img%>">
+                    <a href="blogs/<%=element._id%>">More..
+                    </a>
                 </div>
-                    <%=element.article.substring(0,100)%>...
+                <div class="content">
+                    <div class="header">
+                        <%=element.name%>
+                    </div>
+                    <div>
+                        <%=element.article.substring(0,100)%>...
+                    </div>
                     <button><a href="/blogs/<%=element._id%>/edit">edit</a> </button>
-                <form method="POST" action="/blogs/<%=element._id%>?_method=DELETE" style='display:inline-block'>
-                    <button>delete</button>
-                </form>
-                <!-- <div class="description">
+                    <form method="POST" action="/blogs/<%=element._id%>?_method=DELETE" style='display:inline-block'>
+                        <button>delete</button>
+                    </form>
+                    <!-- <div class="description">
                     <%=element.article%>
                 </div> -->
+                </div>
             </div>
-        </div>
-        <% }) %>
-</div>
-<%- include('partials/footer.ejs') %>
+            <% }) %>
+    </div>
+    <%- include('partials/footer.ejs') %>
