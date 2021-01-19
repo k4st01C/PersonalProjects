@@ -1,51 +1,46 @@
 const mongoose = require('mongoose');
+const Post = require('./models/post.js');
+const User = require('./models/user.js');
 
 mongoose.connect('mongodb://localhost:27017/test', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-const postSchema = new mongoose.Schema({
-    title: String,
-    content: String,
-  }),
-  Post = mongoose.model('Post', postSchema),
-  userSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    posts: [postSchema],
-  }),
-  User = mongoose.model('User', userSchema);
+// User.create({
+//   name:'kemal',
+//   email:'kemal@gmail.com'
+// });
 
-//   const newUser=new User({
-//       name:'Kemal',
-//       email:'kemal@gmail.com',
-//   });
+// Post.create(
+//   {
+//     title: 'aa',
+//     content: 'bb',
+//   },
+//   (err, post) => {
+//     if (err) console.log(err);
+//     else {
+//       User.findOne({ name: 'kemal' }, (err, foundUser) => {
+//         if (err) console.log(err);
+//         else {
+//           foundUser.posts.push(post);
+//           foundUser.save((err, user) => {
+//             if (err) console.log(err);
+//             else {
+//               console.log(user);
+//             }
+//           });
+//         }
+//       });
+//     }
+//   },
+// );
 
-//   newUser.posts.push({
-//     title:'naber',
-//     content:'iyidir',
-//   });
+User.findOne({ name: 'kemal' })
+  .populate('posts')
+  .exec((err, user) => {
+    if (err) console.log(err);
+    else console.log(user);
+  });
 
-// newUser.save((err,user)=>{
-//   if (err) console.log(err);
-//   else {console.log(user);}
-// })
 
-User.findOne({ name: 'Kemal' }, (err, user) => {
-  if (err) {
-    console.log(err);
-  } else {
-    user.posts.push({
-      title: 'aq',
-      content: 'senin',
-    });
-    user.save((err, user) => {
-      if (err) {
-        console.log(err);
-      } else {
-        console.log(user);
-      }
-    });
-  }
-});
