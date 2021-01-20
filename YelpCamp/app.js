@@ -12,33 +12,28 @@ mongoose.connect('mongodb://localhost:27017/yelpCamp', {
   useUnifiedTopology: true,
 });
 
-const campSiteSchema = new mongoose.Schema({
-  name: String,
-  img: String,
-  description:String,
-});
-
-const CampSite = mongoose.model('CampSite', campSiteSchema);
+const User = require('./models/user.js');
+const Campsite = require('./models/campsite.js');
+const Comment = require('./models/comment.js');
 
 app.get('/', (req, res) => {
   res.render('home');
 });
 
 app.get('/campgrounds', (req, res) => {
-  CampSite.find({}, (err, campAreas) => {
+  Campsite.find({}, (err, campAreas) => {
     if (err) console.log(err);
     else res.render('index', { campAreas });
   });
 });
- 
+
 app.post('/campgrounds', (req, res) => {
-   const name = req.body.name;
+  const title = req.body.title;
   const img = req.body.img;
-  const description = req.body.description;
+  const article = req.body.article;
 
-  CampSite.create({ name, img, description }, (err, campsite) => {
+  Campsite.create({ title, img, article }, (err, campsite) => {
     if (err) {
-
       console.log(err);
     } else res.redirect('/campgrounds');
   });
@@ -48,15 +43,13 @@ app.get('/campgrounds/new', (req, res) => {
   res.render('new');
 });
 
-app.get('/campgrounds/:id', (req,res)=>{
-  CampSite.findById(req.params.id,(err,campArea)=>{
+app.get('/campgrounds/:id', (req, res) => {
+  Campsite.findById(req.params.id, (err, campArea) => {
     if (err) console.log(err);
     else {
-      res.render('show',{campArea})
-
+      res.render('show', { campArea });
     }
-  })
-})
+  });
+});
 
 app.listen('3000', () => console.log('Starting'));
-  
