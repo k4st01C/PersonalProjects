@@ -1,0 +1,26 @@
+<%- include('../partials/header.ejs') %>
+
+    <h1>show page</h1>
+
+
+
+    <h5>
+        <%= campArea.title %>
+    </h5>
+    <img src="<%= campArea.img %>" alt="">
+    <h6>
+        <%= campArea.article %>
+            <% campArea.comments.forEach(e=>{ %>
+                <p><%= e.author %></p>
+                    <p>
+                        <%= e.text %>
+                    </p>
+
+                <%})%>
+                <a class="btn btn-primary" href="/campgrounds/<%= campArea._id %>/comments/new" role="button">New Comment</a>
+
+
+    </h6>
+
+
+    <%- include('../partials/footer.ejs') %>

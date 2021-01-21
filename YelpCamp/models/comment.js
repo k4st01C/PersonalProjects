@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const commentSchema = mongoose.Schema({
-  title: String,
-  content: String,
+  text: String,
+  author: String,
 });
 
 module.exports = mongoose.model('Comment', commentSchema);
