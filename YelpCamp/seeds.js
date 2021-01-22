@@ -8,7 +8,7 @@ const mongoose = require('mongoose'),
 			title: 'Ayder',
 			img:
 				'https://seyahatdergisi.com/wp-content/uploads/2015/01/ayder-yaylasi.jpg',
-			article: 'Karadenizde Cennetten bir köşe',
+			article: '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, atque mollitia exercitationem quia quas, praesentium earum repellat, minus sint laborum eius velit! Modi, corporis? Temporibus eius nulla, sint pariatur voluptates odio iure numquam ullam sit id distinctio possimus incidunt ipsum nisi, provident corrupti nobis? Voluptatibus, qui pariatur. Quaerat recusandae dolorum possimus ab deleniti enim tempore, laudantium corporis illo sunt? Dolorem autem quia voluptate ut quos! Amet maiores delectus neque? In quo culpa eius enim, dolorum et voluptas quasi. Assumenda accusamus dicta facere beatae harum adipisci enim maiores sequi quos velit culpa earum nesciunt, nemo eveniet explicabo deleniti quo numquam possimus!',
 		},
 		{
 			title: 'Datça',
@@ -20,19 +20,19 @@ const mongoose = require('mongoose'),
 			title: 'Ayder',
 			img:
 				'https://seyahatdergisi.com/wp-content/uploads/2015/01/ayder-yaylasi.jpg',
-			article: 'Karadenizde Cennetten bir köşe',
+			article: '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, atque mollitia exercitationem quia quas, praesentium earum repellat, minus sint laborum eius velit! Modi, corporis? Temporibus eius nulla, sint pariatur voluptates odio iure numquam ullam sit id distinctio possimus incidunt ipsum nisi, provident corrupti nobis? Voluptatibus, qui pariatur. Quaerat recusandae dolorum possimus ab deleniti enim tempore, laudantium corporis illo sunt? Dolorem autem quia voluptate ut quos! Amet maiores delectus neque? In quo culpa eius enim, dolorum et voluptas quasi. Assumenda accusamus dicta facere beatae harum adipisci enim maiores sequi quos velit culpa earum nesciunt, nemo eveniet explicabo deleniti quo numquam possimus!',
 		},
 		{
 			title: 'Ayder',
 			img:
 				'https://seyahatdergisi.com/wp-content/uploads/2015/01/ayder-yaylasi.jpg',
-			article: 'Karadenizde Cennetten bir köşe',
+			article: '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, atque mollitia exercitationem quia quas, praesentium earum repellat, minus sint laborum eius velit! Modi, corporis? Temporibus eius nulla, sint pariatur voluptates odio iure numquam ullam sit id distinctio possimus incidunt ipsum nisi, provident corrupti nobis? Voluptatibus, qui pariatur. Quaerat recusandae dolorum possimus ab deleniti enim tempore, laudantium corporis illo sunt? Dolorem autem quia voluptate ut quos! Amet maiores delectus neque? In quo culpa eius enim, dolorum et voluptas quasi. Assumenda accusamus dicta facere beatae harum adipisci enim maiores sequi quos velit culpa earum nesciunt, nemo eveniet explicabo deleniti quo numquam possimus!',
 		},
 		{
 			title: 'Ayder',
 			img:
 				'https://seyahatdergisi.com/wp-content/uploads/2015/01/ayder-yaylasi.jpg',
-			article: 'Karadenizde Cennetten bir köşe',
+			article: '  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro, atque mollitia exercitationem quia quas, praesentium earum repellat, minus sint laborum eius velit! Modi, corporis? Temporibus eius nulla, sint pariatur voluptates odio iure numquam ullam sit id distinctio possimus incidunt ipsum nisi, provident corrupti nobis? Voluptatibus, qui pariatur. Quaerat recusandae dolorum possimus ab deleniti enim tempore, laudantium corporis illo sunt? Dolorem autem quia voluptate ut quos! Amet maiores delectus neque? In quo culpa eius enim, dolorum et voluptas quasi. Assumenda accusamus dicta facere beatae harum adipisci enim maiores sequi quos velit culpa earum nesciunt, nemo eveniet explicabo deleniti quo numquam possimus!',
 		},
 	],
 	seedDB = () => {

@@ -1,21 +1,21 @@
 const campsite = require('./models/campsite.js');
 
-const express = require('express'),
-	mongoose = require('mongoose'),
-	app = express(),
-	bodyParser = require('body-parser'),
-	User = require('./models/user.js'),
-	Campsite = require('./models/campsite.js'),
-	Comment = require('./models/comment.js'),
-	seedDB = require('./seeds.js');
+const express    = require('express'),
+      mongoose   = require('mongoose'),
+      app        = express(),
+      bodyParser = require('body-parser'),
+      User       = require('./models/user.js'),
+      Campsite   = require('./models/campsite.js'),
+      Comment    = require('./models/comment.js'),
+      seedDB     = require('./seeds.js');
 
-seedDB();
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
+seedDB();
 
 mongoose.connect('mongodb://localhost:27017/yelpCamp', {
-	useNewUrlParser: true,
+	useNewUrlParser   : true,
 	useUnifiedTopology: true,
 });
 
@@ -31,11 +31,7 @@ app.get('/campgrounds', (req, res) => {
 });
 
 app.post('/campgrounds', (req, res) => {
-	const title = req.body.title;
-	const img = req.body.img;
-	const article = req.body.article;
-
-	Campsite.create({ title, img, article }, (err, campsite) => {
+	Campsite.create(req.body.campsite, (err, campsite) => {
 		if (err) {
 			console.log(err);
 		} else res.redirect('/campgrounds');
@@ -59,34 +55,29 @@ app.get('/campgrounds/:id', (req, res) => {
 
 app.get('/campgrounds/:id/comments/new', (req, res) => {
 	Campsite.findById(req.params.id, (err, site) => {
-		if (err) console.log(err);
-		else {
-			console.log(site._id);
-			res.render('comments/new.ejs',{id:site._id});
+		if (err) {
+			console.log(err);
+			res.redirect('/campgrounds');
+		} else {
+			res.render('comments/new.ejs', { site });
 		}
 	});
-
 });
 
 app.post('/campgrounds/:id/comments', (req, res) => {
-	const text = req.body.text;
-	const author = req.body.author;
 	Campsite.findById(req.params.id, (err, site) => {
 		if (err) console.log(err);
 		else {
-			Comment.create({text,author},(err,comment)=>{
+			Comment.create(req.body.comment, (err, comment) => {
 				if (err) console.log(err);
 				else {
 					site.comments.push(comment._id);
 					site.save();
 				}
-			})
-			console.log(site);
+			});
 			res.redirect(`/campgrounds/${req.params.id}`);
-
 		}
 	});
-	console.log(req.body);
 });
 
 app.listen('3000', () => console.log('Starting'));

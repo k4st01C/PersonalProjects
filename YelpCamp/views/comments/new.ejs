@@ -1,17 +1,32 @@
 <%- include('../partials/header.ejs') %>
 
-    <form action="/campgrounds/<%=id%>/comments" method="POST" class="w-50 mx-auto">
-        <div class="form-outline mb-4">
-            <input type="text" placeholder="author" name="author" class="form-control">
-        </div>
-        <div class="form-outline mb-4">
-            <input type="text" placeholder="comment" name="text" class="form-control">
+<form
+	action="/campgrounds/<%=site._id%>/comments"
+	method="POST"
+	class="w-50 mx-auto"
+>
+	<div class="form-outline mb-4">
+		<input
+			type="text"
+			placeholder="author"
+			name="comment[author]"
+			class="form-control"
+		/>
+	</div>
+	<div class="form-outline mb-4">
+		<input
+			type="text"
+			placeholder="comment"
+			name="comment[text]"
+			class="form-control"
+		/>
+	</div>
 
-        </div>
+	<button type="submit" class="btn btn-primary btn-block mb-4 w-100">
+		Add New Comment
+	</button>
 
-        <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Add New Comment</button>
+	<a class="d-flex" href="/campgrounds">Go back</a>
+</form>
 
-        <a class="d-flex" href="/campgrounds">Go back</a>
-    </form>
-
-    <%- include('../partials/footer.ejs') %>
+<%- include('../partials/footer.ejs') %>

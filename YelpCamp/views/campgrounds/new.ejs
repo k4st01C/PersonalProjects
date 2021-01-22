@@ -2,14 +2,14 @@
 
   <form action="/campgrounds" method="POST" class="w-50 mx-auto">
     <div class="form-outline mb-4">
-      <input type="text" placeholder="Camp Name" name="title" class="form-control">
+      <input type="text" placeholder="Camp Name" name="campsite[title]" class="form-control">
     </div>
     <div class="form-outline mb-4">
-      <input type="text" placeholder="Camp Image Address" name="img" class="form-control">
+      <input type="text" placeholder="Camp Image Address" name="campsite[img]" class="form-control">
 
     </div>
     <div class="form-outline mb-4">
-      <input type="text" placeholder="Description" name="article" class="form-control">
+      <input type="text" placeholder="Description" name="campsite[article]" class="form-control">
 
     </div>
     <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Add New Camp Ground</button>
@@ -18,3 +18,4 @@
   </form>
 
   <%- include('../partials/footer.ejs') %>
+
