@@ -1,13 +1,13 @@
 const campsite = require('./models/campsite.js');
 
-const express    = require('express'),
-      mongoose   = require('mongoose'),
-      app        = express(),
-      bodyParser = require('body-parser'),
-      User       = require('./models/user.js'),
-      Campsite   = require('./models/campsite.js'),
-      Comment    = require('./models/comment.js'),
-      seedDB     = require('./seeds.js');
+const express = require('express'),
+	mongoose = require('mongoose'),
+	app = express(),
+	bodyParser = require('body-parser'),
+	User = require('./models/user.js'),
+	Campsite = require('./models/campsite.js'),
+	Comment = require('./models/comment.js'),
+	seedDB = require('./seeds.js');
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 seedDB();
 
 mongoose.connect('mongodb://localhost:27017/yelpCamp', {
-	useNewUrlParser   : true,
+	useNewUrlParser: true,
 	useUnifiedTopology: true,
 });
 

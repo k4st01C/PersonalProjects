@@ -1,46 +1,27 @@
-const mongoose = require('mongoose');
-const Post = require('./models/post.js');
-const User = require('./models/user.js');
+const bodyParser = require('body-parser');
 
-mongoose.connect('mongodb://localhost:27017/test', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
+const express  = require('express'),
+      mongoose = require('mongoose'),
+      app      = express();
+
+mongoose.connect('mongodb://localhost:27107/tinker',{
+    useNewUrlParser:true,
+    useUnifiedTopology:true
 });
 
-// User.create({
-//   name:'kemal',
-//   email:'kemal@gmail.com'
-// });
+const parser=bodyParser.urlencoded({ extended: true });
+app.use(express.static('public'));
+app.set('view engine', 'ejs');
 
-// Post.create(
-//   {
-//     title: 'aa',
-//     content: 'bb',
-//   },
-//   (err, post) => {
-//     if (err) console.log(err);
-//     else {
-//       User.findOne({ name: 'kemal' }, (err, foundUser) => {
-//         if (err) console.log(err);
-//         else {
-//           foundUser.posts.push(post);
-//           foundUser.save((err, user) => {
-//             if (err) console.log(err);
-//             else {
-//               console.log(user);
-//             }
-//           });
-//         }
-//       });
-//     }
-//   },
-// );
+app.get('', (req, res) => {
+	res.render('home');
+});
 
-User.findOne({ name: 'kemal' })
-  .populate('posts')
-  .exec((err, user) => {
-    if (err) console.log(err);
-    else console.log(user);
-  });
+app.get('/secret', (req, res) => {
+	res.render('secret');
+});
 
+app.post('/',parser,(req,res)=>res.send(req));
 
+app.listen('3000', () => console.log('starting..'));
+ 
