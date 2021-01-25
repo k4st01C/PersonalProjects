@@ -58,7 +58,7 @@ app.post('/register', (req, res) => {
 		new User({ username: req.body.login.username }),
 		req.body.login.password,
 		(err, user) => {
-			if (err) res.render('register');
+			if (err) res.redirect('register');
 			else {
 				passport.authenticate('local')(req, res, () => {
 					res.redirect('secret');
