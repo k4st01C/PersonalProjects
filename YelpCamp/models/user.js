@@ -9,6 +9,6 @@ const userSchema = mongoose.Schema({
 
 });
 
-userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);  //! Adds methods such as authenticate, serialize, etc. to user...
 
 module.exports=mongoose.model('User',userSchema)

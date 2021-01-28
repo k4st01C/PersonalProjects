@@ -7,10 +7,9 @@ const express = require('express'),
 	User = require('./models/user.js'),
 	app = express();
 
-const isLoggedin=(req,res,next)=>{
+const isLoggedin = (req, res, next) => {
 	if (req.isAuthenticated()) next();
 	res.redirect('/');
-
 };
 
 app.use(
@@ -43,7 +42,7 @@ app.get('/', (req, res) => {
 	res.render('home');
 });
 
-app.get('/secret',isLoggedin, (req, res) => {
+app.get('/secret', isLoggedin, (req, res) => {
 	res.render('secret');
 });
 
@@ -83,10 +82,7 @@ app.post(
 
 app.get('/logout', (req, res) => {
 	req.logout();
-	// res.redirect('/');
-	req.session.destroy(function (err) {
-        res.redirect('/'); //Inside a callback… bulletproof!
-    });
+	res.redirect('/');
 });
 
 /* -------------------------------------------------------------------------- */
