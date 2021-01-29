@@ -1,7 +1,7 @@
 const express = require('express'),
 	Campsite = require('../models/campsite.js'),
 	Comment = require('../models/comment.js'),
-	router = express.Router();
+	router = express.Router({ mergeParams: true }); //!merges params from comments and campgrounds
 
 const isLoggedin = (req, res, next) => {
 	if (req.isAuthenticated()) {
