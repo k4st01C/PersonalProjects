@@ -1,7 +1,8 @@
+const express = require('express'),
+	Campsite = require('../models/comment.js'),
+	router = express.router();
 
-
-
-app.get('/campgrounds/:id/comments/new', isLoggedin, (req, res) => {
+router.get('/campgrounds/:id/comments/new', isLoggedin, (req, res) => {
 	Campsite.findById(req.params.id, (err, site) => {
 		if (err) {
 			console.log(err);
@@ -12,7 +13,7 @@ app.get('/campgrounds/:id/comments/new', isLoggedin, (req, res) => {
 	});
 });
 
-app.post('/campgrounds/:id/comments', isLoggedin, (req, res) => {
+router.post('/campgrounds/:id/comments', isLoggedin, (req, res) => {
 	//! addded isloggedin to ensure no post requests are made to hidden routes
 	Campsite.findById(req.params.id, (err, site) => {
 		if (err) console.log(err);
@@ -28,3 +29,5 @@ app.post('/campgrounds/:id/comments', isLoggedin, (req, res) => {
 		}
 	});
 });
+
+module.exports = router;

@@ -1,12 +1,19 @@
-app.get('/', (req, res) => {
+/* eslint-disable no-unused-vars */
+
+const express = require('express'),
+	User = require('../models/user.js'),
+	passport = require('passport'),
+	router = express.router();
+
+router.get('/', (req, res) => {
 	res.render('home');
 });
 
-app.get('/register', (req, res) => {
+router.get('/register', (req, res) => {
 	res.render('register');
 });
 
-app.post('/register', (req, res) => {
+router.post('/register', (req, res) => {
 	const newUser = new User({ username: req.body.username });
 	User.register(newUser, req.body.password, (err, user) => {
 		if (err) {
@@ -19,11 +26,11 @@ app.post('/register', (req, res) => {
 	});
 });
 
-app.get('/login', (req, res) => {
+router.get('/login', (req, res) => {
 	res.render('login');
 });
 
-app.post(
+router.post(
 	'/login',
 	passport.authenticate('local', {
 		successRedirect: '/campgrounds',
@@ -31,9 +38,9 @@ app.post(
 	}),
 );
 
-a=3;
-
-app.get('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
 	req.logOut();
 	res.redirect('/campgrounds');
 });
+
+module.exports = router;
