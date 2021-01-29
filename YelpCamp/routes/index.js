@@ -3,7 +3,7 @@
 const express = require('express'),
 	User = require('../models/user.js'),
 	passport = require('passport'),
-	router = express.router();
+	router = express.Router();
 
 router.get('/', (req, res) => {
 	res.render('home');

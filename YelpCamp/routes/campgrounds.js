@@ -1,26 +1,37 @@
-const express = require('express'),
-	router  = express.router();
+/* eslint-disable no-unused-vars */
 
-router.get('/campgrounds', (req, res) => {
+const express = require('express'),
+	Campsite = require('../models/campsite.js'),
+	router = express.Router();
+
+const isLoggedin = (req, res, next) => {
+	if (req.isAuthenticated()) {
+		next();
+	} else {
+		res.redirect('/login');
+	}
+};
+
+router.get('/', (req, res) => {
 	Campsite.find({}, (err, campAreas) => {
 		if (err) console.log(err);
 		else res.render('campgrounds/index', { campAreas });
 	});
 });
 
-router.post('/campgrounds', (req, res) => {
+router.post('/', (req, res) => {
 	Campsite.create(req.body.campsite, (err, campsite) => {
 		if (err) {
 			console.log(err);
-		} else res.redirect('/campgrounds');
+		} else res.redirect('/');
 	});
 });
 
-router.get('/campgrounds/new', isLoggedin, (req, res) => {
+router.get('/new', isLoggedin, (req, res) => {
 	res.render('campgrounds/new');
 });
 
-router.get('/campgrounds/:id', (req, res) => {
+router.get('/:id', (req, res) => {
 	Campsite.findById(req.params.id)
 		.populate('comments')
 		.exec((err, campArea) => {
@@ -31,5 +42,4 @@ router.get('/campgrounds/:id', (req, res) => {
 		});
 });
 
-
-module.exports=router;
+module.exports = router;

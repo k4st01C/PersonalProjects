@@ -4,17 +4,7 @@ const express = require('express'),
 	LocalStrategy = require('passport-local').Strategy,
 	app = express(),
 	User = require('./models/user.js'),
-	Campsite = require('./models/campsite.js'),
-	Comment = require('./models/comment.js'),
 	seedDB = require('./seeds.js');
-
-const isLoggedin = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		next();
-	} else {
-		res.redirect('/login');
-	}
-};
 
 /* -------------------------------------------------------------------------- */
 /*                                CONFIGURATION                               */
@@ -47,8 +37,6 @@ app.use((req, res, next) => {
 	next();
 });
 
-/* -------------------------------- PASSPORT -------------------------------- */
-
 passport.use(new LocalStrategy(User.authenticate())); //!passport-local-mongoose plugin method
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
@@ -57,8 +45,8 @@ passport.deserializeUser(User.deserializeUser());
 /*                                   ROUTES                                   */
 /* -------------------------------------------------------------------------- */
 
-
-
-/* -------------------------------------------------------------------------- */
+app.use(require('./routes/index.js'));
+app.use('/campgrounds', require('./routes/campgrounds.js'));
+app.use('/campgrounds/:id/comments', require('./routes/comments.js'));
 
 app.listen('3000', () => console.log('Starting'));
