@@ -1,7 +1,8 @@
 const express = require('express'),
 	Campsite = require('../models/campsite.js'),
 	Comment = require('../models/comment.js'),
-	router = express.Router({ mergeParams: true }); //!merges params from comments and campgrounds
+	router = express.Router({ mergeParams: true });
+//!merges params from comments and campgrounds
 
 const isLoggedin = (req, res, next) => {
 	if (req.isAuthenticated()) {
@@ -30,11 +31,13 @@ router.post('/', isLoggedin, (req, res) => {
 			Comment.create(req.body.comment, (err, comment) => {
 				if (err) console.log(err);
 				else {
+					comment.author = { id: req.user._id, username: req.user.username };
+					comment.save();
 					site.comments.push(comment._id);
 					site.save();
+					res.redirect(`/campgrounds/${site._id}`);
 				}
 			});
-			res.redirect(`/campgrounds/${req.params.id}`);
 		}
 	});
 });

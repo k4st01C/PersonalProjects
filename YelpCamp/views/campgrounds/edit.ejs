@@ -1,0 +1,20 @@
+<%- include('../partials/header.ejs') %>
+
+  <form action="/campgrounds/<%=campArea._id%>?_method=PUT" method="POST" class="w-50 mx-auto">
+    <div class="form-outline mb-4">
+      <input value="<%=campArea.title%>" type="text" name="campsite[title]" class="form-control">
+    </div>
+    <div class="form-outline mb-4">
+      <input value="<%=campArea.img%>" type="text" name="campsite[img]" class="form-control">
+
+    </div>
+    <div class="form-outline mb-4">
+      <input value="<%=campArea.article%>" type="text" name="campsite[article]" class="form-control">
+
+    </div>
+    <button type="submit" class="btn btn-primary btn-block mb-4 w-100">Update Camp Ground</button>
+
+    <a class="d-flex" href="/campgrounds">Go back</a>
+  </form>
+
+  <%- include('../partials/footer.ejs') %>
