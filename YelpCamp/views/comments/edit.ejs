@@ -1,0 +1,15 @@
+<%- include('../partials/header.ejs') %>
+
+    <form action="/campgrounds/<%=id%>/comments/<%=comment._id%>?_method=PUT" method="POST" class="w-50 mx-auto">
+        <div class="form-outline mb-4">
+            <input type="text" value="<%=comment.text%>" name="comment[text]" class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block mb-4 w-100">
+            Update Comment
+        </button>
+
+        <a class="d-flex" href="/campgrounds">Go back</a>
+    </form>
+
+    <%- include('../partials/footer.ejs') %>

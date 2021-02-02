@@ -42,4 +42,29 @@ router.post('/', isLoggedin, (req, res) => {
 	});
 });
 
+router.get('/:commentId/edit', (req, res) => {
+	Comment.findById(req.params.commentId, (err, comment) => {
+		if (err) return res.redirect('back');
+		res.render('./comments/edit', { comment, id: req.params.id });
+	});
+});
+
+router.put('/:commentId', (req, res) => {
+	Comment.findByIdAndUpdate(
+		req.params.commentId,
+		req.body.comment,
+		(err, comment) => {
+			if (err) return res.redirect('back');
+			res.redirect('/campgrounds/' + req.params.id);
+		},
+	);
+});
+
+router.delete('/:commentId', (req, res) => {
+	Comment.findByIdAndDelete(req.params.commentId, (err) => {
+		if (err) return console.log(err);
+		res.redirect('back');
+	});
+});
+
 module.exports = router;

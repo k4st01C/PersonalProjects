@@ -15,6 +15,7 @@ mongoose.connect('mongodb://localhost:27017/yelpCamp', {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useCreateIndex: true,
+	useFindAndModify: false,
 });
 
 app.set('view engine', 'ejs');
@@ -36,7 +37,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
 	res.locals.currentUser = req.user;
-	//!pass variables to view engine
+	//!pass user variable to view engine
 	next();
 });
 

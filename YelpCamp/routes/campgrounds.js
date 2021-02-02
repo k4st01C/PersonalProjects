@@ -5,11 +5,11 @@ const express = require('express'),
 	router = express.Router();
 
 const isOwner = (req, res, next) => {
-	if (!req.isAuthenticated()) return res.redirect('/campgrounds');
+	if (!req.isAuthenticated()) return res.redirect('back');
 	Campsite.findById(req.params.id, (err, site) => {
-		if (err) return res.redirect('/campgrounds');
+		if (err) return res.redirect('back');
 		if (site.author.id.equals(req.user._id)) return next();
-		res.redirect('/campgrounds');
+		res.redirect('back');
 	});
 };
 
@@ -56,22 +56,21 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.get('/:id/edit',isOwner, (req, res) => {
+router.get('/:id/edit', isOwner, (req, res) => {
 	Campsite.findById(req.params.id, (err, campArea) => {
 		if (err) return console.log(err);
 		res.render('./campgrounds/edit', { campArea });
 	});
 });
 
-router.put('/:id', (req, res) => {
+router.put('/:id', isOwner, (req, res) => {
 	Campsite.findByIdAndUpdate(req.params.id, req.body.campsite, (err, site) => {
 		if (err) return console.log(err);
-		console.log(site);
 		res.redirect('/campgrounds/' + req.params.id);
 	});
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/:id', isOwner, (req, res) => {
 	Campsite.findByIdAndDelete(req.params.id, (err, site) => {
 		if (err) return console.log(err);
 		res.redirect('/campgrounds');
