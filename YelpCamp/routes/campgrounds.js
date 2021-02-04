@@ -2,24 +2,9 @@
 
 const express = require('express'),
 	Campsite = require('../models/campsite.js'),
+	mwIsOwner = require('../middleware').isOwner(Campsite, 'id'),
+	mwLoggedIn = require('../middleware').isLoggedin,
 	router = express.Router();
-
-const isOwner = (req, res, next) => {
-	if (!req.isAuthenticated()) return res.redirect('back');
-	Campsite.findById(req.params.id, (err, site) => {
-		if (err) return res.redirect('back');
-		if (site.author.id.equals(req.user._id)) return next();
-		res.redirect('back');
-	});
-};
-
-const isLoggedin = (req, res, next) => {
-	if (req.isAuthenticated()) {
-		next();
-	} else {
-		res.redirect('/login');
-	}
-};
 
 router.get('/', (req, res) => {
 	Campsite.find({}, (err, campAreas) => {
@@ -28,7 +13,7 @@ router.get('/', (req, res) => {
 	});
 });
 
-router.post('/', isLoggedin, (req, res) => {
+router.post('/', mwLoggedIn, (req, res) => {
 	req.body.campsite.author = { id: req.user._id, username: req.user.username };
 	req.body.campsite.img =
 		req.body.campsite.img || 'https://via.placeholder.com/150';
@@ -36,12 +21,13 @@ router.post('/', isLoggedin, (req, res) => {
 		if (err) {
 			console.log(err);
 		} else {
+			req.flash('success', 'campground created');
 			res.redirect('/campgrounds');
 		}
 	});
 });
 
-router.get('/new', isLoggedin, (req, res) => {
+router.get('/new', mwLoggedIn, (req, res) => {
 	res.render('./campgrounds/new');
 });
 
@@ -56,24 +42,25 @@ router.get('/:id', (req, res) => {
 		});
 });
 
-router.get('/:id/edit', isOwner, (req, res) => {
+router.get('/:id/edit', mwIsOwner, (req, res) => {
 	Campsite.findById(req.params.id, (err, campArea) => {
 		if (err) return console.log(err);
 		res.render('./campgrounds/edit', { campArea });
 	});
 });
 
-router.put('/:id', isOwner, (req, res) => {
+router.put('/:id', mwIsOwner, (req, res) => {
 	Campsite.findByIdAndUpdate(req.params.id, req.body.campsite, (err, site) => {
 		if (err) return console.log(err);
 		res.redirect('/campgrounds/' + req.params.id);
 	});
 });
 
-router.delete('/:id', isOwner, (req, res) => {
+router.delete('/:id', mwIsOwner, (req, res) => {
 	Campsite.findByIdAndDelete(req.params.id, (err, site) => {
 		if (err) return console.log(err);
-		res.redirect('/campgrounds');
+		req.flash('error', 'Campground Deleted');
+		res.redirect('/');
 	});
 });
 

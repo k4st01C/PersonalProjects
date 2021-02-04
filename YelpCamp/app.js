@@ -3,6 +3,7 @@ const express = require('express'),
 	mongoose = require('mongoose'),
 	passport = require('passport'),
 	LocalStrategy = require('passport-local').Strategy,
+	flash = require('connect-flash'),
 	app = express(),
 	User = require('./models/user.js');
 // seedDB = require('./seeds.js');
@@ -23,6 +24,7 @@ app.use(express.static('public'));
 app.use(methodOverride('_method'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(flash());
 // seedDB();
 
 /* --------------------------------- MIDDLEWARE -------------------------------- */
@@ -37,6 +39,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use((req, res, next) => {
 	res.locals.currentUser = req.user;
+	res.locals.error = req.flash('error');
+	res.locals.success = req.flash('success');
 	//!pass user variable to view engine
 	next();
 });
@@ -50,7 +54,7 @@ passport.deserializeUser(User.deserializeUser());
 /*                                   ROUTES                                   */
 /* -------------------------------------------------------------------------- */
 
-app.use(require('./routes/index.js'));
+app.use(require('./routes'));
 app.use('/campgrounds', require('./routes/campgrounds.js'));
 app.use('/campgrounds/:id/comments', require('./routes/comments.js'));
 
